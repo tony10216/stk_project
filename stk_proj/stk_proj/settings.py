@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+# add
+import os
+import tempfile
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +28,29 @@ SECRET_KEY = '_5zku0jm5j0^1iiw7yf7)oke7660s2-kx&ryz!nyg48e6vr6_*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# cheyu.lin modify - 20201113
+# >>>>
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
-
+# Martor Configuration
+MARTOR_THEME = 'bootstrap'  # semantic
+MARTOR_ENABLE_LABEL = True
+MARTOR_ENABLE_CONFIGS = {
+    'emoji': 'true',        # to enable/disable emoji icons.
+    'imgur': 'true',        # to enable/disable imgur/custom uploader.
+    'mention': 'true',      # to enable/disable mention
+    'jquery': 'true',       # to include/revoke jquery (require for admin default django)
+    'living': 'false',      # to enable/disable live updates in preview
+    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
+    'hljs': 'true',         # to enable/disable hljs highlighting in preview
+}
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'horizontal', 'heading', 'pre-code',
+    'blockquote', 'unordered-list', 'ordered-list',
+    'link', 'image-link', 'image-upload', 'emoji',
+    'direct-mention', 'toggle-maximize', 'help'
+]
+# <<<<
 
 # Application definition
 
@@ -37,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'stk_proj',
+    'stk_app',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +144,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'stk_static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'stk_media')
